@@ -26,8 +26,6 @@ export default class StepItem extends SuperComponent {
 
   properties = props;
 
-  parent = null;
-
   // 组件的内部数据
   data = {
     classPrefix: name,
@@ -78,7 +76,7 @@ export default class StepItem extends SuperComponent {
     },
 
     onTap() {
-      this.parent.handleClick(this.data.index);
+      this.$parent.handleClick(this.data.index);
     },
   };
 }

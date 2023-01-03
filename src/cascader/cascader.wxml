@@ -5,7 +5,7 @@
       {{title}}
     </view>
     <view class="{{name}}__close-btn" bind:tap="hide">
-      <slot name="closeBtn" />
+      <slot name="close-btn" />
       <t-icon wx:if="{{closeBtn}}" size="24" name="close" />
     </view>
     <view class="{{name}}__content">
@@ -34,8 +34,16 @@
         class="{{name}}__options-container"
         style="width: {{items.length + 1}}00vw; transform: translateX(-{{stepIndex}}00vw)"
       >
-        <scroll-view wx:for="{{items}}" wx:for-item="options" wx:key="index" class="{{name}}__options" scroll-y>
+        <scroll-view
+          wx:for="{{items}}"
+          wx:for-item="options"
+          wx:key="index"
+          class="{{name}}__options"
+          scroll-y
+          scroll-top="{{scrollTopList[index]}}"
+        >
           <t-radio-group
+            class="cascader-radio-group-{{index}}"
             value="{{selectedValue[index]}}"
             keys="{{keys}}"
             options="{{options}}"

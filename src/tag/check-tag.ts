@@ -1,7 +1,7 @@
 import { wxComponent, SuperComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './check-tag-props';
-import { classNames } from '../common/utils';
+import { classNames, calcIcon } from '../common/utils';
 
 const { prefix } = config;
 const name = `${prefix}-tag`;
@@ -36,26 +36,28 @@ export default class CheckTag extends SuperComponent {
   };
 
   observers = {
-    'size, shape, closable, disabled, checked'() {
+    'size, disabled, checked'() {
       this.setClass();
+    },
+    icon(v) {
+      this.setData({
+        _icon: calcIcon(v),
+      });
     },
   };
 
   methods = {
     setClass() {
-      const { prefix, classPrefix } = this.data;
-      const { size, shape, variant, closable, disabled, checked, defaultChecked } = this.properties;
-      const isChecked = checked || defaultChecked;
+      const { classPrefix } = this.data;
+      const { size, variant, disabled, checked } = this.properties;
       const tagClass = [
         classPrefix,
         `${classPrefix}--checkable`,
-        closable ? `${classPrefix}--closable ${prefix}-is-closable` : '',
-        disabled ? `${classPrefix}--disabled ${prefix}-is-disabled` : '',
-        isChecked ? `${classPrefix}--checked ${prefix}-is-checked` : '',
-        `${classPrefix}--theme-${isChecked ? 'primary' : 'default'}`,
-        `${classPrefix}--size-${size || 'medium'}`,
-        `${classPrefix}--shape-${shape || 'square'}`,
-        `${classPrefix}--variant-${variant || 'dark'}`,
+        disabled ? `${classPrefix}--disabled` : '',
+        checked ? `${classPrefix}--checked` : '',
+        `${classPrefix}--${checked ? 'primary' : 'default'}`,
+        `${classPrefix}--${size}`,
+        `${classPrefix}--${variant}`,
       ];
       const className = classNames(tagClass);
       this.setData({
@@ -63,19 +65,12 @@ export default class CheckTag extends SuperComponent {
       });
     },
 
-    handleClose(e: WechatMiniprogram.BaseEvent) {
+    onClick() {
       if (this.data.disabled) return;
-      this.triggerEvent('close', e);
-    },
+      const { checked } = this.data;
 
-    handleChange() {
-      if (this.data.disabled) return;
-      const { checked, defaultChecked } = this.properties;
-      const isChecked = checked || defaultChecked;
-      this.setData({
-        checked: !isChecked,
-      });
-      this._trigger('change', { checked: !isChecked });
+      this._trigger('click');
+      this._trigger('change', { checked: !checked });
     },
   };
 }

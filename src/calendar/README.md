@@ -5,6 +5,14 @@ spline: form
 isComponent: true
 ---
 <span class="coverages-badge" style="margin-right: 10px"><img src="https://img.shields.io/badge/coverages%3A%20lines-100%25-blue" /></span><span class="coverages-badge" style="margin-right: 10px"><img src="https://img.shields.io/badge/coverages%3A%20functions-100%25-blue" /></span><span class="coverages-badge" style="margin-right: 10px"><img src="https://img.shields.io/badge/coverages%3A%20statements-100%25-blue" /></span><span class="coverages-badge" style="margin-right: 10px"><img src="https://img.shields.io/badge/coverages%3A%20branches-100%25-blue" /></span>
+
+<div style="background: #ecf2fe; display: flex; align-items: center; line-height: 20px; padding: 14px 24px; border-radius: 3px; color: #555a65">
+  <svg fill="none" viewBox="0 0 16 16" width="16px" height="16px" style="margin-right: 5px">
+    <path fill="#0052d9" d="M8 15A7 7 0 108 1a7 7 0 000 14zM7.4 4h1.2v1.2H7.4V4zm.1 2.5h1V12h-1V6.5z" fillOpacity="0.9"></path>
+  </svg>
+  该组件于 0.22.0 版本上线，请留意版本。
+</div>
+
 ## 引入
 
 全局引入，在 miniprogram 根目录下的`app.json`中配置，局部引入，在需要引入的页面或组件的`index.json`中配置。
@@ -17,25 +25,33 @@ isComponent: true
 
 ## 代码演示
 
-### 单个选择日期
+### 组件类型
+#### 单个选择日期
 
 {{ base }}
 
-### 多个选择日期
+#### 多个选择日期
 
 {{ multiple }}
 
-### 区间选择日期
+#### 区间选择日期
 
 {{ range }}
 
-### 自定义文案
+### 组件样式
+
+#### 自定义文案
 
 {{ custom-text }}
 
-### 自定义区间
+#### 自定义区间
 
 {{ custom-range }}
+
+#### 不使用 Popup
+
+{{ without-popup }}
+
 ## API
 ### Calendar Props
 
@@ -47,11 +63,12 @@ first-day-of-week | Number | 0 | 第一天从星期几开始，默认 0 = 周日
 format | Function | - | 用于格式化日期的函数。TS 类型：`CalendarFormatType ` `type CalendarFormatType = (day: TDate) => TDate` `type TDateType = 'selected' \| 'disabled' \| 'start' \| 'centre' \| 'end' \| ''` `interface TDate { date: Date; day: number; type: TDateType; className?: string; prefix?: string; suffix?: string;}`。[详细类型定义](https://github.com/Tencent/tdesign-miniprogram/tree/develop/src/calendar/type.ts) | N
 max-date | Number | - | 最大可选的日期，不传则默认半年后 | N
 min-date | Number | - | 最小可选的日期，不传则默认今天 | N
-title | String / Slot | '' | 标题，不传默认为“请选择日期” | N
+title | String / Slot | - | 标题，不传默认为“请选择日期” | N
 type | String | single | 日历的选择类型，single = 单选；multiple = 多选; range = 区间选择。可选项：single/multiple/range | N
+use-popup | Boolean | true | `0.32.0`。是否使用弹出层包裹日历 | N
 value | Number / Array | - | 当前选择的日期，不传则默认今天，当 type = multiple 或 range 时传入数组。TS 类型：`number \| number[]` | N
 default-value | Number / Array | undefined | 当前选择的日期，不传则默认今天，当 type = multiple 或 range 时传入数组。非受控属性。TS 类型：`number \| number[]` | N
-visible | Boolean | false | 是否显示日历 | N
+visible | Boolean | false | 是否显示日历；`usePopup` 为 true 时有效 | N
 
 ### Calendar Events
 

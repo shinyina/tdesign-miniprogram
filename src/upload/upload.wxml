@@ -50,7 +50,7 @@
         </view>
         <!-- 删除 -->
         <view class="{{classPrefix}}__close-btn hotspot-expanded" bindtap="onDelete" data-index="{{index}}">
-          <slot wx:if="{{deleteBtn === 'slot'}}" name="deleteBtn" />
+          <slot wx:if="{{deleteBtn === 'slot'}}" name="delete-btn" />
           <t-icon wx:else name="close" size="16" color="#fff" />
         </view>
       </view>
@@ -65,7 +65,7 @@
       <view class="{{classPrefix}}__wrapper" style="{{gridItemStyle}}">
         <view class="{{classPrefix}}__add-icon">
           <slot wx:if="{{addContent === 'slot'}}" name="add-content" />
-          <t-icon wx:else name="add" size="40rpx" color="rgba(0,0,0,0.26)" />
+          <t-icon wx:else name="add" />
         </view>
       </view>
     </t-grid-item>
