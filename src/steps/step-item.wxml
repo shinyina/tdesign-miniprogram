@@ -4,7 +4,7 @@
   style="{{customStyle}}"
   class="{{_.cls(classPrefix, [layout, ['readonly', readonly]])}} {{prefix}}-class"
   bind:tap="onTap"
-  aria-role="{{ariaReadonly}}"
+  aria-role="{{ariaRole || ariaRoleName}}"
 >
   <!-- icon  -->
   <view class="{{_.cls(classPrefix + '__anchor', [layout])}}">
