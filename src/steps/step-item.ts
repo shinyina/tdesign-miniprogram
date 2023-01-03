@@ -37,7 +37,7 @@ export default class StepItem extends SuperComponent {
     curStatus: '',
     layout: 'vertical',
     isLastChild: false,
-    ariaReadonly: '',
+    ariaRoleName: '',
   };
 
   lifetimes = {
@@ -48,9 +48,9 @@ export default class StepItem extends SuperComponent {
         this.parent = parent;
       }
 
-      const ariaReadonly = this.data.readonly ? 'option' : 'button';
+      const ariaRoleName = this.data.readonly ? 'option' : 'button';
       this.setData({
-        ariaReadonly,
+        ariaRoleName,
       });
     },
   };
