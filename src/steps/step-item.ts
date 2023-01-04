@@ -40,12 +40,6 @@ export default class StepItem extends SuperComponent {
 
   lifetimes = {
     ready() {
-      const [parent] = this.getRelationNodes('./steps') || [];
-
-      if (parent) {
-        this.parent = parent;
-      }
-
       const ariaRoleName = this.data.readonly ? 'option' : 'button';
       this.setData({
         ariaRoleName,
